@@ -7,7 +7,8 @@ import TodoList from "../components/TodoList";
 const Home: React.FC = () => {
 
     const [todos, setTodos] = useState<ITodo[]>(() => {
-        return JSON.parse(localStorage.getItem('todos') || "[]") as ITodo[];
+        // return JSON.parse(localStorage.getItem('todos') || "[]") as ITodo[]; TODO
+        return []
     });
 
     useEffect(() => {
@@ -20,7 +21,17 @@ const Home: React.FC = () => {
             id: Date.now(),
             completed: false,
         }
+
+        const regex = /[^&*()-_=+#$@!]*/gm; // TODO
+        if(regex.test(title)){
+            throw "Includes special symbols"
+        }
+
         setTodos(prev => [newTodo, ...prev]);
+
+        if(todos.length >= 10){  // TODO
+            throw "Too much"
+        }
     }
 
         const toggleHandler = (id: number) => {
