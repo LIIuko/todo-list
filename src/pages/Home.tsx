@@ -22,7 +22,7 @@ const Home: React.FC = () => {
             completed: false,
         }
 
-        const regex = /[^&*()-_=+#$@!]*/gm; // TODO
+        const regex = /\W/g // TODO
         if(regex.test(title)){
             throw "Includes special symbols"
         }
